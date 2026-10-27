@@ -1,0 +1,53 @@
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Ajuste - Minimos Quadrados</title>
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+        <style>
+            body { font-family: Arial, sans-serif; margin: 20px; }
+            .equacao { font-size: 1.2em; margin-bottom: 10px; }
+            table { border-collapse: collapse; width: 100%; }
+            th, td { border: 1px solid #aaa; padding: 6px; text-align: center; }
+            th { background-color: #eee; }
+        </style>
+    </head>
+    <body>
+        <h1>Ajuste por Minimos Quadrados</h1>
+        <div class="equacao">U(x) = 4.851535 + 0.35247x</div>
+        <table border="1" style="border-collapse: collapse;"><tr><th>i</th><th>x_i</th><th>y_i</th><th>U(x_i)</th><th>d_i</th><th>d_i^2</th></tr><tr><td>0</td><td>0.0</td><td>5.0</td><td>4.851535</td><td>0.148465</td><td>0.022042</td></tr><tr><td>1</td><td>2.0</td><td>6.0</td><td>5.556475</td><td>0.443525</td><td>0.196714</td></tr><tr><td>2</td><td>4.0</td><td>7.0</td><td>6.261415</td><td>0.738585</td><td>0.545508</td></tr><tr><td>3</td><td>6.0</td><td>6.0</td><td>6.966355</td><td>-0.966355</td><td>0.933842</td></tr><tr><td>4</td><td>9.0</td><td>9.0</td><td>8.023765</td><td>0.976235</td><td>0.953035</td></tr><tr><td>5</td><td>11.0</td><td>8.0</td><td>8.728705</td><td>-0.728705</td><td>0.531011</td></tr><tr><td>6</td><td>12.0</td><td>7.0</td><td>9.081175</td><td>-2.081175</td><td>4.331289</td></tr><tr><td>7</td><td>15.0</td><td>10.0</td><td>10.138585</td><td>-0.138585</td><td>0.019206</td></tr><tr><td>8</td><td>17.0</td><td>12.0</td><td>10.843525</td><td>1.156475</td><td>1.337434</td></tr><tr><td>9</td><td>19.0</td><td>12.0</td><td>11.548465</td><td>0.451535</td><td>0.203884</td></tr></table><p><strong>Soma d_i:</strong> -0.0</p><p><strong>Soma d_i² (D):</strong> 9.073965</p>
+        <div id="grafico" style="height: 500px;"></div>
+
+        <script>
+            const pontos = [{x: 0.0, y: 5.0}, {x: 2.0, y: 6.0}, {x: 4.0, y: 7.0}, {x: 6.0, y: 6.0}, {x: 9.0, y: 9.0}, {x: 11.0, y: 8.0}, {x: 12.0, y: 7.0}, {x: 15.0, y: 10.0}, {x: 17.0, y: 12.0}, {x: 19.0, y: 12.0}];
+            const linha = [{x: 0.0, y: 4.851535}, {x: 2.0, y: 5.556475}, {x: 4.0, y: 6.261415}, {x: 6.0, y: 6.966355}, {x: 9.0, y: 8.023765}, {x: 11.0, y: 8.728705}, {x: 12.0, y: 9.081175}, {x: 15.0, y: 10.138585}, {x: 17.0, y: 10.843525}, {x: 19.0, y: 11.548465}];
+
+            const trace1 = {
+                x: pontos.map(p => p.x),
+                y: pontos.map(p => p.y),
+                mode: 'markers',
+                type: 'scatter',
+                name: 'Pontos',
+                marker: { color: 'red', size: 8 }
+            };
+
+            const trace2 = {
+                x: linha.map(p => p.x),
+                y: linha.map(p => p.y),
+                mode: 'lines',
+                type: 'scatter',
+                name: 'Reta Ajustada',
+                line: { color: 'blue', width: 3 }
+            };
+
+            const layout = {
+                title: 'Minimos Quadrados',
+                xaxis: { title: 'x' },
+                yaxis: { title: 'y' }
+            };
+
+            Plotly.newPlot('grafico', [trace1, trace2], layout);
+        </script>
+    </body>
+    </html>
+    
